@@ -2,6 +2,23 @@ const UserModel= require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
+const userValidation=async(req, res)=>{
+  const token = req.header("x-auth-token");
+
+  if (!token) return res.json(false);
+  const verified = jwt.verify(token, "raj1234");
+  if (!verified) return res.json(false);
+   return res.json(true);
+
+}
+
+
+
+
+
+
+
 const userRegistration=async(req, res)=>{
         const {username, email, password}= req.body;
         const salt = await bcrypt.genSalt(10);
@@ -42,19 +59,12 @@ const userLogin=async(req, res)=>{
         });
         return;
       }
-
-
-      
   const token = jwt.sign({ id: User._id, name:User.name, email:User.email }, "raj1234");
-
-      res.json({ token, user: { id: User._id, username: User.name } });
-
-    
-
+      res.json({ token, user: { id: User._id, username: User.username } });
 }
-
 
 module.exports={
      userRegistration,
-     userLogin
+     userLogin,
+     userValidation
 }

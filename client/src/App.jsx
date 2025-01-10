@@ -3,6 +3,7 @@ import Layout from "./Layout";
 import Home from "./Home";
 import Login from "./Login";
 import Registration from "./Registration";
+import DashBoard from "./Dahsboard";
 
 
 const App=()=>{
@@ -15,6 +16,7 @@ const App=()=>{
             <Route path="home" element={<Home/>} />
             <Route path="login" element={<Login/>} />
             <Route path="registration" element={<Registration/>}/>
+            <Route path="dashboard" element={<DashBoard/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
